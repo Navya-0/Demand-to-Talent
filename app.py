@@ -48,7 +48,7 @@ st.markdown(
     <style>
     /* Set background image */
     body {
-        background-image: url('https://www.bing.com/images/search?view=detailV2&ccid=QQHgrQgO&id=31EA5A2D8AEC540F1855B4401FEA7C2D28B5F084&thid=OIP.QQHgrQgOePJw-EoJTSBzdAHaEn&mediaurl=https%3a%2f%2fsnacknation.com%2fwp-content%2fuploads%2f2015%2f10%2fhabits-of-effective-hr-professionals.jpg&exph=624&expw=1000&q=images+of+an+org+hr&simid=608036987740364183&FORM=IRPRST&ck=B8E61A269DF081AC988F0CCE0B9E1943&selectedIndex=163&itb=0&adlt=STRICT');  /* Replace with your image URL */
+        background-image: url('https://wallpapercave.com/wp/wp3416331.jpg');  /* Replace with your image URL */
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
