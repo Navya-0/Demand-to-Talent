@@ -40,15 +40,18 @@ def recommend_employees(model, input_data, data):
     return top_employees
 
 # Streamlit App Configuration
-st.set_page_config(page_title="Demand to Talent", layout="wide")
+st.set_page_config(page_title="Demand to Employee", layout="wide")
 
-# Add custom CSS for background color, font styles, and design
+# Add custom CSS for background image, font styles, and design
 st.markdown(
     """
     <style>
-    /* Set a soft gradient background for the page */
+    /* Set background image */
     body {
-        background: linear-gradient(to right, #ff7e5f, #feb47b);
+        background-image: url('https://www.bing.com/images/search?view=detailV2&ccid=QQHgrQgO&id=31EA5A2D8AEC540F1855B4401FEA7C2D28B5F084&thid=OIP.QQHgrQgOePJw-EoJTSBzdAHaEn&mediaurl=https%3a%2f%2fsnacknation.com%2fwp-content%2fuploads%2f2015%2f10%2fhabits-of-effective-hr-professionals.jpg&exph=624&expw=1000&q=images+of+an+org+hr&simid=608036987740364183&FORM=IRPRST&ck=B8E61A269DF081AC988F0CCE0B9E1943&selectedIndex=163&itb=0&adlt=STRICT');  /* Replace with your image URL */
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
         color: #333;
     }
 
@@ -123,7 +126,7 @@ st.markdown(
 )
 
 # Title with a larger font and custom styling
-st.markdown('<p class="title">🚀 Demand To Talent</p>', unsafe_allow_html=True)
+st.markdown('<p class="title">🚀 Demand to Employee</p>', unsafe_allow_html=True)
 
 # Header text with background color to ensure visibility
 st.markdown('<p class="header">An AI-based system for HR to match new project demands with the best employees.</p>', unsafe_allow_html=True)
@@ -157,7 +160,7 @@ for idx, column in enumerate(columns):
 if st.button("Get Suitable Employees"):
     try:
         recommendations = recommend_employees(model, user_input, data)
-        st.subheader("🌟 Top 3 Recommended Employees")
+        st.subheader("🌟Employees")
         for i, employee in enumerate(recommendations, 1):
             st.write(f"**{i}. Employee ID:** {employee}")
     except Exception as e:
