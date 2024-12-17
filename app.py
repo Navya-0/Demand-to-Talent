@@ -42,70 +42,68 @@ def recommend_employees(model, input_data, data):
 # Streamlit App Configuration
 st.set_page_config(page_title="Demand to Employee", layout="wide")
 
-# Add custom CSS for background image, font styles, and design
+# Add custom CSS for background, text and inputs styling
 st.markdown(
     """
     <style>
-    /* Set background image */
+    /* Set black background */
     body {
-        background-image: url('https://wallpapercave.com/wp/wp3416331.jpg');  /* Replace with your image URL */
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-        color: #333;
+        background-color: #000000;
+        color: white;
+        font-family: 'Arial', sans-serif;
     }
 
-    /* Style the title */
+    /* Style for the main title */
     .title {
         font-size: 40px;
         font-weight: bold;
-        color: #fff;
-        font-family: 'Arial', sans-serif;
+        color: #ffffff;
         text-align: center;
         padding-top: 50px;
+        font-family: 'Helvetica', sans-serif;
     }
 
-    /* Style the header */
+    /* Style for subheaders */
     .header {
         font-size: 22px;
-        color: #fff;
+        color: #ffffff;
         font-family: 'Verdana', sans-serif;
         text-align: center;
-        background-color: rgba(0, 0, 0, 0.6);  /* Dark background for better visibility */
-        padding: 10px;
-        border-radius: 5px;
+        background-color: rgba(0, 0, 0, 0.7);  /* Semi-transparent black background for better readability */
+        padding: 15px;
+        border-radius: 8px;
         margin-top: 20px;
     }
 
-    /* Style the subheader */
-    .subheader {
-        font-size: 18px;
-        color: #fff;
-        font-family: 'Verdana', sans-serif;
-        text-align: center;
-    }
-
-    /* Add a subtle background design for inputs */
+    /* Style for the input section */
     .background-pattern {
-        background-color: #f0f0f0;
+        background-color: #333333;
         padding: 20px;
         border-radius: 10px;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        margin-top: 30px;
     }
 
-    /* Style the input labels */
-    .stTextInput label, .stSelectbox label, .stNumberInput label {
+    /* Input fields and selectbox styling */
+    .stTextInput input, .stNumberInput input, .stSelectbox select {
+        background-color: #222222;
+        border: 2px solid #444444;
+        color: white;
+        padding: 10px;
+        border-radius: 8px;
         font-size: 16px;
-        color: #333;
-        font-weight: 600;
     }
 
-    /* Style the buttons */
+    .stTextInput input:focus, .stNumberInput input:focus, .stSelectbox select:focus {
+        border-color: #00bcd4;
+    }
+
+    /* Buttons Styling */
     .stButton>button {
         background-color: #4CAF50;
         color: white;
         font-size: 16px;
-        padding: 10px 24px;
+        padding: 12px 24px;
         border-radius: 12px;
         border: none;
         cursor: pointer;
@@ -115,10 +113,10 @@ st.markdown(
         background-color: #45a049;
     }
 
-    /* Footer */
+    /* Footer Styling */
     footer {
         font-size: 14px;
-        color: #fff;
+        color: white;
         text-align: center;
     }
     </style>
@@ -160,7 +158,7 @@ for idx, column in enumerate(columns):
 if st.button("Get Suitable Employees"):
     try:
         recommendations = recommend_employees(model, user_input, data)
-        st.subheader("🌟Employees")
+        st.subheader("🌟 Top 3 Recommended Employees")
         for i, employee in enumerate(recommendations, 1):
             st.write(f"**{i}. Employee ID:** {employee}")
     except Exception as e:
