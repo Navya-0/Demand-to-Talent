@@ -68,6 +68,10 @@ st.markdown(
         color: #fff;
         font-family: 'Verdana', sans-serif;
         text-align: center;
+        background-color: rgba(0, 0, 0, 0.6);  /* Dark background for better visibility */
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 20px;
     }
 
     /* Style the subheader */
@@ -120,6 +124,8 @@ st.markdown(
 
 # Title with a larger font and custom styling
 st.markdown('<p class="title">🚀 Demand To Talent</p>', unsafe_allow_html=True)
+
+# Header text with background color to ensure visibility
 st.markdown('<p class="header">An AI-based system for HR to match new project demands with the best employees.</p>', unsafe_allow_html=True)
 
 # Load and train model
