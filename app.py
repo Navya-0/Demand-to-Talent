@@ -39,7 +39,7 @@ def recommend_employees(model, input_data, data):
     top_employees = [employee_ids[i] for i in employee_indices]
     return top_employees
 
-# Streamlit App
+# Streamlit App Configuration
 st.set_page_config(page_title="Demand to Talent", layout="wide")
 
 # Add custom CSS for background color, font styles, and design
@@ -54,7 +54,7 @@ st.markdown(
 
     /* Style the title */
     .title {
-        font-size: 50px;
+        font-size: 40px;
         font-weight: bold;
         color: #fff;
         font-family: 'Arial', sans-serif;
@@ -64,7 +64,7 @@ st.markdown(
 
     /* Style the header */
     .header {
-        font-size: 24px;
+        font-size: 22px;
         color: #fff;
         font-family: 'Verdana', sans-serif;
         text-align: center;
@@ -72,22 +72,23 @@ st.markdown(
 
     /* Style the subheader */
     .subheader {
-        font-size: 20px;
+        font-size: 18px;
         color: #fff;
         font-family: 'Verdana', sans-serif;
         text-align: center;
     }
 
-    /* Add a subtle background design */
+    /* Add a subtle background design for inputs */
     .background-pattern {
-        background-image: url('https://www.transparenttextures.com/patterns/diagonal-stripes.png');
-        background-repeat: repeat;
-        padding: 50px 0;
+        background-color: #f0f0f0;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     /* Style the input labels */
     .stTextInput label, .stSelectbox label, .stNumberInput label {
-        font-size: 18px;
+        font-size: 16px;
         color: #333;
         font-weight: 600;
     }
@@ -107,7 +108,7 @@ st.markdown(
         background-color: #45a049;
     }
 
-    /* Style the footer */
+    /* Footer */
     footer {
         font-size: 14px;
         color: #fff;
@@ -124,40 +125,39 @@ st.markdown('<p class="header">An AI-based system for HR to match new project de
 # Load and train model
 model, data, label_encoders = load_and_train_model()
 
-# Wrap the form and inputs in a container for better styling
-with st.container():
-    st.markdown('<div class="background-pattern">', unsafe_allow_html=True)
+# Collect Demand Attributes
+st.markdown('<div class="background-pattern">', unsafe_allow_html=True)
 
-    # Collect Demand Attributes
-    st.subheader("📊 Enter Project Demand Attributes")
-    user_input = []
-    columns = data.columns.drop("Employment ID")
+# Create two columns for input layout
+st.subheader("📊 Enter Project Demand Attributes")
+user_input = []
+columns = data.columns.drop("Employment ID")
 
-    # Create two columns for input layout
-    col1, col2 = st.columns(2)
+# Create two columns for input layout
+col1, col2 = st.columns(2)
 
-    # Distribute the input fields between the two columns
-    for idx, column in enumerate(columns):
-        with col1 if idx % 2 == 0 else col2:
-            if column in label_encoders:
-                options = label_encoders[column].classes_
-                value = st.selectbox(f"{column}:", options, key=column)
-                user_input.append(label_encoders[column].transform([value])[0])
-            else:
-                value = st.number_input(f"{column}:", min_value=0, step=1, key=column)
-                user_input.append(value)
+# Distribute the input fields between the two columns
+for idx, column in enumerate(columns):
+    with col1 if idx % 2 == 0 else col2:
+        if column in label_encoders:
+            options = label_encoders[column].classes_
+            value = st.selectbox(f"{column}:", options, key=column)
+            user_input.append(label_encoders[column].transform([value])[0])
+        else:
+            value = st.number_input(f"{column}:", min_value=0, step=1, key=column)
+            user_input.append(value)
 
-    # Button with a custom style to trigger the recommendation
-    if st.button("Get Suitable Employees"):
-        try:
-            recommendations = recommend_employees(model, user_input, data)
-            st.subheader("🌟 Top 3 Recommended Employees")
-            for i, employee in enumerate(recommendations, 1):
-                st.write(f"**{i}. Employee ID:** {employee}")
-        except Exception as e:
-            st.error(f"An error occurred: {str(e)}")
+# Add a button with a color to trigger the recommendation
+if st.button("Get Suitable Employees"):
+    try:
+        recommendations = recommend_employees(model, user_input, data)
+        st.subheader("🌟 Top 3 Recommended Employees")
+        for i, employee in enumerate(recommendations, 1):
+            st.write(f"**{i}. Employee ID:** {employee}")
+    except Exception as e:
+        st.error(f"An error occurred: {str(e)}")
 
-    st.markdown('</div>', unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True)
 
 # Footer with additional information or links
 st.markdown("---")
